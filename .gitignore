@@ -5,3 +5,7 @@ node_modules/
 *.swp
 .cache
 .env
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/SlackOverflowDev.iml
