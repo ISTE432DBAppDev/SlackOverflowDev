@@ -62,7 +62,7 @@ class UserRating {
   public function checkUserRating($accountID, $tipID){
     try {
       $dbconn = $this -> getDBInfo();
-      $result = pg_prepare($dbconn, "checkUserRatingQuery", "SELECT FROM USERRATING WHERE accountID = $1 AND tipID = $2");
+      $result = pg_prepare($dbconn, "checkUserRatingQuery", "SELECT * FROM USERRATING WHERE accountID = $1 AND tipID = $2");
       $result = pg_execute($dbconn, "checkUserRatingQuery", array($accountID, $tipID );
       
       $numRows = pg_num_rows($result);
