@@ -37,6 +37,16 @@ class UserRating {
     $this -> tipID = $tipID;
   }
 
+  private function getDBInfo() {
+     try {
+       $instance = DatabaseConnection ::getInstance();
+       return $conn = $instance -> getConnection();
+     } catch (Exception $e) {
+       echo $e -> getMessage();
+       return null;
+     }
+  }
+  
   public function createUserRating($accountID, $tipID){
     try {
       $dbconn = $this -> getDBInfo();
