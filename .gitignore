@@ -9,3 +9,4 @@ node_modules/
 .idea/workspace.xml
 .idea/modules.xml
 .idea/SlackOverflowDev.iml
+src/DataLayer/dbconfig.php
