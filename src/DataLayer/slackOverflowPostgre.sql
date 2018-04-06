@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS slackoverflow;
+CREATE DATABASE slackoverflow;
+
+-- \c  slackoverflow
+
+DROP TABLE IF EXISTS  ACCOUNTS;
+CREATE TABLE ACCOUNTS(
+  accountID INT NOT NULL,
+  username VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NULL,
+  PRIMARY KEY (accountID);
+);
+
+DROP TYPE language CASCADE NO ACTION;
+CREATE TYPE language AS ENUM('Java','C++','Javascript','CSS');
+
+--DROP TABLE IF EXISTS TIPS;
+CREATE TABLE TIPS(
+	accountID INT NOT NULL REFERENCES ACCOUNTS(accountID),
+	language language,
+	description VARCHAR(255),
+  rating INT  NOT NULL
+);
+
+--DROP TABLE IF EXISTS  USERRATINGS;
+CREATE TABLE USERRATINGS(
+accountID INT NOT NULL REFERENCES ACCOUNTS(accountID),
+TipID INT NOT NULL,
+username VARCHAR(255),
+rating SMALLINT NOT NULL
+);
