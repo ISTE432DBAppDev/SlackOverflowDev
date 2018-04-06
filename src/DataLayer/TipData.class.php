@@ -9,7 +9,6 @@ class TipData {
   private $tipID;
   private $accountID;
   private $language;
-  private $title;
   private $description;
   private $rating;
 
@@ -58,20 +57,6 @@ class TipData {
   /**
    * @return mixed
    */
-  public function getTitle() {
-    return $this -> title;
-  }
-
-  /**
-   * @param mixed $title
-   */
-  public function setTitle($title) {
-    $this -> title = $title;
-  }
-
-  /**
-   * @return mixed
-   */
   public function getDescription() {
     return $this -> description;
   }
@@ -97,16 +82,38 @@ class TipData {
     $this -> rating = $rating;
   }
 
-  public function createTip($accountID, $language, $description, $title) {
-
+  private function getDBInfo() {
+     try {
+       $instance = DatabaseConnection ::getInstance();
+       return $conn = $instance -> getConnection();
+     } catch (Exception $e) {
+       echo $e -> getMessage();
+       return null;
+     }
+  }
+  
+  public function createTip($accountID, $language, $description) {
+    try {
+      $dbconn = $this -> getDBInfo();
+      $result = pg_prepare($dbconn, "createTipQuery", "INSERT INTO TIPS (accountID, langauge, description, rating) VALUES ($1, $2, $3, 0)");
+      $result = pg_execute($dbconn, "createTipQuery", array($accountID, $language, $description );
+  return $result;
+    } catch (Exception $e)  {
+    echo $e;
+    return null;
+    }
   }
 
   public function getAllTips(){
+    try {
+      $dbconn = $this -> getDBInfo();
+      $result = pg_prepare($dbconn, "getAllTipsQuery", "SELECT * FROM TIPS WHERE accountID = $1 AND tipID = $2");
+      $result = pg_execute($dbconn, "getAllTipsQuery", array($accountID, $tipID );
+  return $result;
+    } catch (Exception $e)  {
+    echo $e;
     return null;
-  }
-
-  public function getTip($tipID){
-    return null;
+    }
   }
 
   public function upvoteTip($tipID){
