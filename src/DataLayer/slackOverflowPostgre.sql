@@ -11,6 +11,7 @@ CREATE TABLE ACCOUNTS(
   PRIMARY KEY (accountID)
 );
 
+
 CREATE TYPE language AS ENUM('Java','C++','Javascript','CSS');
 
 DROP TABLE IF EXISTS TIPS;
