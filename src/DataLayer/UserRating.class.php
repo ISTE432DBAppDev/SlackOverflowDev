@@ -8,7 +8,6 @@
 class UserRating {
   private $accountID;
   private $tipID;
-  private $status;
 
   /**
    * @return mixed
@@ -38,25 +37,7 @@ class UserRating {
     $this -> tipID = $tipID;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getStatus() {
-    return $this -> status;
-  }
-
-  /**
-   * @param mixed $status
-   */
-  public function setStatus($status) {
-    $this -> status = $status;
-  }
-
-  public function createUserRating($accountID, $tipID, $status){
-    return null;
-  }
-
-  public function updateUserRating($accountID, $tipID, $status){
+  public function createUserRating($accountID, $tipID){
     return null;
   }
 
