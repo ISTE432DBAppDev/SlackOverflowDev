@@ -1,30 +1,22 @@
 <?php
 require_once 'dbconfig.php';
+
 /**
  * Class: DatabaseConnection
  * Date: 4/6/2018
  * Description:
  */
-
 class DatabaseConnection {
 
-  private $_connection;
-
-  private static $_instance; //The single instance
-
+  /**
+   * @var
+   */
+  private static $_instance;
 
   /**
-   * Retrieves and instance of the Database. If an instance is already
-   * made it returns the same instance. If there is no previous instance
-   * then a new instance is created.
-   * @return DatabaseConnection
+   * @var PDO
    */
-  public static function getInstance() {
-    if (!self ::$_instance) { // If no instance then make one
-      self ::$_instance = new self();
-    }
-    return self ::$_instance;
-  }
+  private $_connection; //The single instance
 
 
   /**
@@ -42,7 +34,7 @@ class DatabaseConnection {
       $this -> _connection = new PDO($dsn);
 
       if ($this -> $_connection) {
-        echo "Connected to the <strong>$this -> $_connection</strong> database successfully!";
+        echo "Connected to the <strong> =" . $this -> $_connection . "</strong> database successfully!";
       }
 
     } catch (PDOException $e) {
@@ -56,21 +48,18 @@ class DatabaseConnection {
     }
   }
 
-
   /**
-   * Retrieves an instance of the Database connection, not the instance.
-   * @return PDO
+   * Retrieves and instance of the Database. If an instance is already
+   * made it returns the same instance. If there is no previous instance
+   * then a new instance is created.
+   * @return DatabaseConnection
    */
-  function getConnection() {
-    $dbh = null;
-    return $this -> _connection;
+  public static function getInstance() {
+    if (!self ::$_instance) { // If no instance then make one
+      self ::$_instance = new self();
+    }
+    return self ::$_instance;
   }
-
-
-  // Magic method clone is empty to prevent duplication of connection
-  private function __clone() {
-  }
-
 
   /**
    * @param $objName - Name of Object / Database Table
@@ -94,5 +83,23 @@ class DatabaseConnection {
       echo $e -> getMessage();
       die();
     }
+  }
+
+
+  // Magic method clone is empty to prevent duplication of connection
+
+  /**
+   * Retrieves an instance of the Database connection, not the instance.
+   * @return PDO
+   */
+  function getConnection() {
+    $dbh = null;
+    return $this -> _connection;
+  }
+
+  /**
+   *
+   */
+  private function __clone() {
   }
 }

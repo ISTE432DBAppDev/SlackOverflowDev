@@ -1,29 +1,27 @@
 <?php
-include 'DatabaseConnection.class.php';
-
 /**
- * Class: AccountData
+ * Class: UserRatingData
  * Date: 4/4/2018
  * Description:
  */
-class AccountData {
+
+class UserRatingData {
 
   /**
-   * @param $userName
-   * @param $pwd
+   * @param $accountID
+   * @param $tipID
    * @return null|resource
    */
-  public function createAccount($userName, $pwd) {
+  public function createUserRating($accountID, $tipID) {
     try {
       $dbconn = $this -> getDBInfo();
-      $result = pg_prepare($dbconn, "createAccountQuery", "INSERT INTO ACCOUNTS (username, password) VALUES ($1, $2)");
-      $result = pg_execute($dbconn, "createAccountQuery", array($userName, SHA1($pwd)));
+      pg_prepare($dbconn, "createUserRatingQuery", "INSERT INTO USERRATING (accountID, tipsID) VALUES ($1, $2)");
+      $result = pg_execute($dbconn, "createUserRatingQuery", array($accountID, $tipID));
       return $result;
     } catch (Exception $e) {
       echo $e;
       return null;
     }
-
   }
 
   /**
@@ -40,15 +38,15 @@ class AccountData {
   }
 
   /**
-   * @param $userName
-   * @param $pwd
+   * @param $accountID
+   * @param $tipID
    * @return bool|null
    */
-  public function loginAccount($userName, $pwd) {
+  public function checkUserRating($accountID, $tipID) {
     try {
       $dbconn = $this -> getDBInfo();
-      $result = pg_prepare($dbconn, "loginAccountQuery", "SELECT accountID FROM ACCOUNTS WHERE username=$1 AND password=$2");
-      $result = pg_execute($dbconn, "loginAccountQuery", array($userName, SHA1($pwd)));
+      pg_prepare($dbconn, "checkUserRatingQuery", "SELECT * FROM USERRATING WHERE accountID = $1 AND tipID = $2");
+      $result = pg_execute($dbconn, "checkUserRatingQuery", array($accountID, $tipID));
 
       $numRows = pg_num_rows($result);
       if ($numRows == 1) {
@@ -56,7 +54,6 @@ class AccountData {
       } else {
         return false;
       }
-
     } catch (Exception $e) {
       echo $e;
       return null;
