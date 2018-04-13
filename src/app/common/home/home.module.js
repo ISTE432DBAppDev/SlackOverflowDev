@@ -5,7 +5,7 @@ import './home.scss';
 
 const HomeModule = angular
   .module('home', [])
-  .service('HomeService', HomeService)
+  .factory('HomeService', HomeService)
   .component('home', HomeComponent)
   .config(($stateProvider) => {
     'ngInject';
