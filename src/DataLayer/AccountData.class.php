@@ -13,11 +13,11 @@ class AccountData {
    * @param $pwd
    * @return null|resource
    */
-  public function createAccount($userName, $pwd) {
+  public function createAccount($userName, $pwd, $salt) {
     try {
       $dbconn = $this -> getDBInfo();
-      pg_prepare($dbconn, "createAccountQuery", "INSERT INTO ACCOUNTS (username, password) VALUES ($1, $2)");
-      $result = pg_execute($dbconn, "createAccountQuery", array($userName, SHA1($pwd)));
+      pg_prepare($dbconn, "createAccountQuery", "INSERT INTO ACCOUNTS (username, password, salt) VALUES ($1, $2, $3)");
+      $result = pg_execute($dbconn, "createAccountQuery", array($userName, $pwd));
       return $result;
     } catch (Exception $e) {
       echo $e;
@@ -48,7 +48,7 @@ class AccountData {
     try {
       $dbconn = $this -> getDBInfo();
       pg_prepare($dbconn, "loginAccountQuery", "SELECT accountID FROM ACCOUNTS WHERE username=$1 AND password=$2");
-      $result = pg_execute($dbconn, "loginAccountQuery", array($userName, SHA1($pwd)));
+      $result = pg_execute($dbconn, "loginAccountQuery", array($userName, $pwd));
 
       $numRows = pg_num_rows($result);
       if ($numRows == 1) {
@@ -62,4 +62,20 @@ class AccountData {
       return null;
     }
   }
+  
+  public function getAccountSalt($userName){
+    try {
+      $dbconn = $this -> getDBInfo();
+      pg_prepare($dbconn, "getAccountSaltQuery", "SELECT salet FROM ACCOUNTS WHERE username=$1");
+      $result = pg_execute($dbconn, "getAccountSaltQuery", array($userName));
+      return $result;
+      
+    } catch (Exception $e) {
+      echo $e;
+      return null;
+    }
+  }
+  
+  
 }
+
