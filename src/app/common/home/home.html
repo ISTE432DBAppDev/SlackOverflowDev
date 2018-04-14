@@ -1,5 +1,16 @@
 <div class="container">
-  <h1>Hello, World!</h1>
-  <p>View the <a href="https://github.com/fostertheweb/angularjs-starter/blob/master/README.md"><code>README</code></a> to learn how to use the AngularJS Starter.</p>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Home Component!</h1>
+      <p>View the <a href="https://github.com/fostertheweb/angularjs-starter/blob/master/README.md"><code>README</code></a> to learn how to use the AngularJS Starter.</p>
+    </div><!-- end col -->
+  </div><!-- end row -->
+  {{vm.temp}}
+
+  <login ng-if="vm.state=='login'"></login>
+  <topic ng-if="vm.state=='topic'"></topic>
+  <tips ng-if="vm.state=='tips'"></tips>
+  <post ng-if="vm.state=='post'"></post>
+  <language ng-if="vm.state=='language'"></language>
 </div>
 

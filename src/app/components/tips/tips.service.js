@@ -1,4 +1,4 @@
-export default class HomeService {
+export default class TipsService {
   constructor($log) {
     'ngInject';
 
@@ -6,6 +6,6 @@ export default class HomeService {
   }
 
   hello() {
-    console.log('This is the home component!');
+    console.log('This is the tips component!');
   }
 }
