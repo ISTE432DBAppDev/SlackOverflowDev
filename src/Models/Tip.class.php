@@ -28,6 +28,23 @@ class Tip {
   private $rating;
 
   /**
+   * Tip constructor.
+   * @param $tipID
+   * @param $accountID
+   * @param $language
+   * @param $description
+   * @param $rating
+   */
+  public function __construct($tipID, $accountID, $language, $description, $rating) {
+    $this -> tipID = $tipID;
+    $this -> accountID = $accountID;
+    $this -> language = $language;
+    $this -> description = $description;
+    $this -> rating = $rating;
+  }
+
+
+  /**
    * @return mixed
    */
   public function getTipID() {

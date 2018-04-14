@@ -16,6 +16,16 @@ class Account {
   private $userName;
 
   /**
+   * Account constructor.
+   * @param $accountID
+   * @param $userName
+   */
+  public function __construct($accountID, $userName) {
+    $this -> accountID = $accountID;
+    $this -> userName = $userName;
+  }
+
+  /**
    * @return mixed
    */
   public function getAccountID() {

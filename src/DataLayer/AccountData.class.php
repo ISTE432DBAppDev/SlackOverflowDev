@@ -16,7 +16,7 @@ class AccountData {
   public function createAccount($userName, $pwd) {
     try {
       $dbconn = $this -> getDBInfo();
-      $result = pg_prepare($dbconn, "createAccountQuery", "INSERT INTO ACCOUNTS (username, password) VALUES ($1, $2)");
+      pg_prepare($dbconn, "createAccountQuery", "INSERT INTO ACCOUNTS (username, password) VALUES ($1, $2)");
       $result = pg_execute($dbconn, "createAccountQuery", array($userName, SHA1($pwd)));
       return $result;
     } catch (Exception $e) {
@@ -47,7 +47,7 @@ class AccountData {
   public function loginAccount($userName, $pwd) {
     try {
       $dbconn = $this -> getDBInfo();
-      $result = pg_prepare($dbconn, "loginAccountQuery", "SELECT accountID FROM ACCOUNTS WHERE username=$1 AND password=$2");
+      pg_prepare($dbconn, "loginAccountQuery", "SELECT accountID FROM ACCOUNTS WHERE username=$1 AND password=$2");
       $result = pg_execute($dbconn, "loginAccountQuery", array($userName, SHA1($pwd)));
 
       $numRows = pg_num_rows($result);

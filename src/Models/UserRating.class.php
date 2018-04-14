@@ -16,6 +16,16 @@ class UserRating {
   private $tipID;
 
   /**
+   * UserRating constructor.
+   * @param $accountID
+   * @param $tipID
+   */
+  public function __construct($accountID, $tipID) {
+    $this -> accountID = $accountID;
+    $this -> tipID = $tipID;
+  }
+
+  /**
    * @return mixed
    */
   public function getAccountID() {
