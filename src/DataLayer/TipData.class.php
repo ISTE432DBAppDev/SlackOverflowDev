@@ -40,11 +40,11 @@ class TipData {
   /**
    * @return null|resource
    */
-  public function getAllTips() {
+  public function getAllTipsForLanguage($language) {
     try {
       $dbconn = $this -> getDBInfo();
-      pg_prepare($dbconn, "getAllTipsQuery", "SELECT * FROM TIPS");
-      $result = pg_execute($dbconn, "getAllTipsQuery", array());
+      pg_prepare($dbconn, "getAllTipsForLanguageQuery", "SELECT * FROM TIPS WHERE language = $1");
+      $result = pg_execute($dbconn, "getAllTipsForLanguageQuery", array($language));
       return $result;
     } catch (Exception $e) {
       echo $e;

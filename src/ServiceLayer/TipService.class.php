@@ -48,8 +48,8 @@ class TipService {
   /**
    * @return array|resource
    */
-  public function getAllTips() {
-    $allTips = $this -> getDataClass() -> getAllTips();
+  public function getAllTipsForLanguage() {
+    $allTips = $this -> getDataClass() -> getAllTipsForLanguage();
     $allTipObjects = array();
 
     foreach ($allTips as $tip){
